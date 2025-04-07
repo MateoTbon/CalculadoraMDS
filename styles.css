@@ -1,10 +1,58 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
+background: linear-gradient(to right, #ff9a9e, #fad0c4);
+color: #333;
+padding: 20px;
 }
-input, button {
-    margin: 10px;
-    padding: 10px;
-    font-size: 16px;
+
+h2 {
+color: #444;
+}
+
+input {
+padding: 10px;
+margin: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+font-size: 16px;
+text-align: center;
+}
+
+button {
+padding: 10px 20px;
+margin: 10px;
+border: none;
+border-radius: 5px;
+font-size: 16px;
+cursor: pointer;
+transition: 0.3s;
+}
+
+button:hover {
+opacity: 0.8;
+}
+
+button:nth-child(1) { background: #4CAF50; color: white; }
+button:nth-child(2) { background: #f44336; color: white; }
+button:nth-child(3) { background: #ff9800; color: white; }
+button:nth-child(4) { background: #2196F3; color: white; }
+button:nth-child(5), button:nth-child(6) { background: #6a5acd; color: white; }
+
+h3 {
+margin-top: 20px;
+}
+
+#error {
+font-weight: bold;
+}
+
+ul {
+list-style: none;
+padding: 0;
+}
+
+li {
+background: rgba(255, 255, 255, 0.8);
+padding: 10px;
+margin: 5px 0;
+border-radius: 5px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
