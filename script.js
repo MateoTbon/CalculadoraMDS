@@ -1,6 +1,6 @@
 function calcular(operacion) {
-    let num1 = document.getElementById("num1").value;
-    let num2 = document.getElementById("num2").value;
+    let num1 = document.getElementById("num1").value.replace(',', '.');
+    let num2 = document.getElementById("num2").value.replace(',', '.');
     let resultado;
     let error = "";
 
@@ -13,20 +13,20 @@ function calcular(operacion) {
         
         switch (operacion) {
             case 'suma':
-                resultado = num1 + num2;
+                resultado = ajustarPrecision(num1 + num2);
                 break;
             case 'resta':
-                resultado = num1 - num2;
+                resultado = ajustarPrecision(num1 - num2);
                 break;
             case 'multiplicacion':
-                resultado = num1 * num2;
+                resultado = ajustarPrecision(num1 * num2);
                 break;
             case 'division':
                 if (num2 === 0) {
                     error = "Error: No se puede dividir entre cero";
                     resultado = "";
                 } else {
-                    resultado = num1 / num2;
+                    resultado = ajustarPrecision(num1 / num2);
                     if (!isFinite(resultado)) {
                         error = "Advertencia: El resultado es infinito o indefinido";
                         resultado = "";
@@ -38,4 +38,14 @@ function calcular(operacion) {
 
     document.getElementById("resultado").innerText = resultado;
     document.getElementById("error").innerText = error;
+}
+
+function ajustarPrecision(valor) {
+    if (Math.abs(valor) >= 1e10 || Math.abs(valor) < 1e-10) {
+        let exp = Math.floor(Math.log10(Math.abs(valor)));
+        let base = valor / Math.pow(10, exp);
+        return base.toFixed(5) + " × 10^" + exp;
+    } else {
+        return parseFloat(valor.toFixed(10));
+    }
 }
