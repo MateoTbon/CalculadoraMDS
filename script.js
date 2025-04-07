@@ -61,11 +61,15 @@ function usarANS(campo) {
 }
 
 function ajustarPrecision(valor) {
-    if (Math.abs(valor) >= 1e10 || Math.abs(valor) < 1e-10) {
+    if (valor== 0) {
+        return "0.00000";
+    } 
+    else if (Math.abs(valor) >= 1e10 || Math.abs(valor) < 1e-10) {
         let exp = Math.floor(Math.log10(Math.abs(valor)));
         let base = valor / Math.pow(10, exp);
         return base.toFixed(5) + " × 10^" + exp;
-    } else {
+    } 
+    else {
         return parseFloat(valor.toFixed(10));
     }
 }
