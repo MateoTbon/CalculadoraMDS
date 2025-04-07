@@ -1,8 +1,14 @@
+let ans = null;
+let historial = [];
+
 function calcular(operacion) {
     let num1 = document.getElementById("num1").value.replace(',', '.');
     let num2 = document.getElementById("num2").value.replace(',', '.');
     let resultado;
     let error = "";
+
+    if (num1.toLowerCase() === "ans") num1 = ans;
+    if (num2.toLowerCase() === "ans") num2 = ans;
 
     if (isNaN(num1) || isNaN(num2) || num1.trim() === "" || num2.trim() === "") {
         error = "Error: Ingrese solo números válidos";
@@ -36,8 +42,22 @@ function calcular(operacion) {
         }
     }
 
+    if (resultado !== "") {
+        ans = resultado;
+        historial.unshift(`${num1} ${operacion} ${num2} = ${resultado}`);
+        if (historial.length > 10) historial.pop();
+    }
+
     document.getElementById("resultado").innerText = resultado;
     document.getElementById("error").innerText = error;
+    document.getElementById("ans").innerText = ans !== null ? ans : "N/A";
+    actualizarHistorial();
+}
+
+function usarANS(campo) {
+    if (ans !== null) {
+        document.getElementById(campo).value = ans;
+    }
 }
 
 function ajustarPrecision(valor) {
@@ -48,4 +68,14 @@ function ajustarPrecision(valor) {
     } else {
         return parseFloat(valor.toFixed(10));
     }
+}
+
+function actualizarHistorial() {
+    let historialElement = document.getElementById("historial");
+    historialElement.innerHTML = "";
+    historial.forEach(entry => {
+        let li = document.createElement("li");
+        li.textContent = entry;
+        historialElement.appendChild(li);
+    });
 }
